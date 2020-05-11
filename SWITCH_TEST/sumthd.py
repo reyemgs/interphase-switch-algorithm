@@ -27,7 +27,5 @@ def sumthd(vec_x, v_struct, numof_value, wf_vector, dec_vector, wf_sum):
             numof_switching += 1
 
         counter += 1
-
+    #Hi
     #Вызов THD
-
-    
