@@ -1,0 +1,27 @@
+import math
+import numpy as np 
+                #S             T             kpOP        StartThd   Col_OP
+def calcfitness(sumof_values, 
+                thd_sum, 
+                numof_switching, 
+                start_thd, 
+                total_spc):
+    
+    f1 = ((sumof_values[1]**2 + sumof_values[2]**2 + sumof_values[3]**2)
+         / ((sumof_values[1] + sumof_values[2] + sumof_values[3])**2))
+
+    f2 = math.sqrt((thd_sum[1] + thd_sum[2] + thd_sum[3]) / 900)
+
+    f3 = numof_switching / total_spc
+
+    f1 *= 0.7
+    f2 *= 0.2
+    f3 *= 0.1
+
+    o = f1 + f2 + f3
+    
+    return f1, f2, f3, o
+
+
+    
+
