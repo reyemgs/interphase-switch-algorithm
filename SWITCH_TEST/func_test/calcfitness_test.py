@@ -1,4 +1,4 @@
-from calcfitness import calcfitness
+from 
 
 f1, f2, f3, o= calcfitness([15, 16, 18, 123, 132], [1, 2, 3, 4, 5], 10, 0, 2)
 print('F1:', f1)
