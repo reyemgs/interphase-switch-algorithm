@@ -1,11 +1,18 @@
 import numpy as np  
-           #Vx     V            noV        Izm       Rd        osc_sum
-def sumthd(vec_x, v_struct, numof_value, wf_vector, dec_vector, wf_sum):
+# ! Calc_sum_thd.m
 
-    sumof_values = [0, 0, 0]     #S
-    wf_sum = np.zeros((3,104))  #Osc_sum
-    numof_switching = 0         #perecl
-    counter = 1                 #G
+def sumthd(vec_x,         # * Vx
+            v_struct,     # * V
+            numof_value,  # * noV
+            wf_vector,    # * Izm
+            dec_vector,   # * Rd
+            wf_sum):      # * Osc_sum
+
+
+    sumof_values = [0, 0, 0]    #*S
+    wf_sum = np.zeros((3,104))  #*Osc_sum
+    numof_switching = 0         #*perecl
+    counter = 1                 #*G
 
     for i in range(1, numof_value, 2):
         a = i - 1
@@ -27,5 +34,6 @@ def sumthd(vec_x, v_struct, numof_value, wf_vector, dec_vector, wf_sum):
             numof_switching += 1
 
         counter += 1
-    #Hi
-    #Вызов THD
+    
+    # TODO Calc_DznI_THD
+    # ! Вызов THD

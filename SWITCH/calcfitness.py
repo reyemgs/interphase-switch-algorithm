@@ -1,14 +1,15 @@
 import math
 import numpy as np 
-                #S             T             kpOP        StartThd   Col_OP
-def calcfitness(sumof_values, 
-                thd_sum, 
-                numof_switching, 
-                start_thd, 
-                total_spc):
-    
+# ! Calc_Fitness.m
+
+def calcfitness(sumof_values,   # * S
+               thd_sum,         # * T
+               numof_switching, # * KpOP
+               start_thd,       # * StartTHD
+               total_spc):      # * Col_OP
+
     f1 = ((sumof_values[1]**2 + sumof_values[2]**2 + sumof_values[3]**2)
-         / ((sumof_values[1] + sumof_values[2] + sumof_values[3])**2))
+          / ((sumof_values[1] + sumof_values[2] + sumof_values[3])**2))
 
     f2 = math.sqrt((thd_sum[1] + thd_sum[2] + thd_sum[3]) / 900)
 
