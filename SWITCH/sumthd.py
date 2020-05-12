@@ -1,7 +1,7 @@
 import numpy as np  
 # ! Calc_sum_thd.m
 
-def sumthd(vec_x,         # * Vx
+def sumthd( vec_x,         # * Vx
             v_struct,     # * V
             numof_value,  # * noV
             wf_vector,    # * Izm
@@ -36,4 +36,4 @@ def sumthd(vec_x,         # * Vx
         counter += 1
     
     # TODO Calc_DznI_THD
-    # ! Вызов THD
+    # ? Вызов THD

@@ -9,7 +9,7 @@ def calcfitness(sumof_values,   # * S
                total_spc):      # * Col_OP
 
     f1 = ((sumof_values[1]**2 + sumof_values[2]**2 + sumof_values[3]**2)
-          / ((sumof_values[1] + sumof_values[2] + sumof_values[3])**2))
+        / ((sumof_values[1] + sumof_values[2] + sumof_values[3])**2))
 
     f2 = math.sqrt((thd_sum[1] + thd_sum[2] + thd_sum[3]) / 900)
 
