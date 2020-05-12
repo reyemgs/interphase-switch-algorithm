@@ -1,14 +1,13 @@
 import numpy as np  
 # ! Calc_sum_thd.m
-
-def sumthd( vec_x,         # * Vx
-            v_struct,     # * V
-            numof_value,  # * noV
-            wf_vector,    # * Izm
-            dec_vector,   # * Rd
-            wf_sum):      # * Osc_sum
-
-
+def sumthd( 
+    vec_x,        # * Vx
+    v_struct,     # * V
+    numof_value,  # * noV
+    wf_vector,    # * Izm
+    dec_vector,   # * Rd
+    wf_sum        # * Osc_sum
+):     
     sumof_values = [0, 0, 0]    #*S
     wf_sum = np.zeros((3,104))  #*Osc_sum
     numof_switching = 0         #*perecl

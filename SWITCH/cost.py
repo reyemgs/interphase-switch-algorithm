@@ -1,16 +1,15 @@
 import numpy as np
 # ! My_Cost.m
-
-def costfunction(vec_x,                
-                pbest_vector,          # * PreviousV
-                pbest_value,           # * PreviousBest
-                numof_value,           # * noV
-                convergence_curve,     # * MyConvergenceCurve
-                all_costs,             # * AllCosts
-                sumthd,                # * 
-                calculationfitness):
-    #        1)PreviousV     2)PreviousBest   3)noV   4)MyConvergenceCurve  5)AllCosts
-    # global _pbest_vector, _pbest_value, _numof_value, _convergence_curve, _all_costs
+def costfunction(
+    vec_x,                 # * Vx (not sure)
+    pbest_vector,          # * PreviousV
+    pbest_value,           # * PreviousBest
+    numof_value,           # * noV
+    convergence_curve,     # * MyConvergenceCurve
+    all_costs,             # * AllCosts
+    sumthd,                # * calc_sum_thd.m
+    calculationfitness     # * calc_fitness.m
+):
     for i in range(0, numof_value, 2):
         if vec_x[i] == 1 and vec_x[i+1] == 1:
             vec_x[i] = pbest_vector[i]
