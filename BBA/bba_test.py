@@ -25,7 +25,7 @@ def binary_bat_algorithm(n, A, r, d, Max_iter, CostFunction):
                 Sol[i, j] = 1
 
     for i in range(0, n):
-       Fitness[i] = CostFunction(Sol[i,:])
+        Fitness[i] = CostFunction(Sol[i,:])
 
     fmin, I = Fitness.min(0), Fitness.argmin(0)
     best = Sol[I,:]
