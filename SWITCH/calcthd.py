@@ -4,8 +4,8 @@ import numpy as np
 
 def calcthd(wf_sum): # * OscS  
     n = len(wf_sum)  # * N
-    wf = np.reshape(wf_sum[0:], (n, 1))  # * Osc
-
+    #wf = np.reshape(wf_sum[0,:], (n, 1))  # * Osc
+    wf = wf_sum.T
     cvof_elec = math.sqrt(sum((wf_sum**2) * 0.02 / (n - 1)) / 0.02) # * TrueRMSI
     
     s = np.zeros((n, 10))
