@@ -1,4 +1,6 @@
-import numpy as np  
+import numpy as np
+from calcthd import calcthd
+
 # ! Calc_sum_thd.m
 def sumthd( 
     vec_x,        # * Vx
@@ -6,13 +8,14 @@ def sumthd(
     numof_value,  # * noV
     wf_vector,    # * Izm
     dec_vector,   # * Rd
-    wf_sum        # * Osc_sum
+    wf_sum,       # * Osc_sum
+    calcthd       # ? calcthd.m
 ):     
     sumof_values = [0, 0, 0]    #*S
     wf_sum = np.zeros((3,104))  #*Osc_sum
     numof_switching = 0         #*perecl
     counter = 1                 #*G
-
+    
     for i in range(1, numof_value, 2):
         a = i - 1
         if vec_x[a] == 1:
@@ -33,6 +36,7 @@ def sumthd(
             numof_switching += 1
 
         counter += 1
+    thd_percent = [0, 0, 0]
+    sumof_values[1], thd_percent[1] = calcthd(wf_sum[0,:])
     
-    # TODO Calc_DznI_THD
-    # ? Вызов THD
+    return sumof_values, thd_percent, numof_switching, dec_vector, wf_sum

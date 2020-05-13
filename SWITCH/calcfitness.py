@@ -1,5 +1,6 @@
 import math
 import numpy as np 
+
 # ! Calc_Fitness.m
 def calcfitness(
     sumof_values,    # * S               

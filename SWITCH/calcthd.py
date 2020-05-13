@@ -1,7 +1,7 @@
 import math
 import numpy as np
-# ! Calc_DznI_THD.m
 
+# ! Calc_DznI_THD.m
 def calcthd(wf_sum): # * OscS  
     n = len(wf_sum)  # * N
     wf = np.reshape(wf_sum[0:], (n, 1))  # * Osc
@@ -29,7 +29,7 @@ def calcthd(wf_sum): # * OscS
         k += 1
 
     sq = math.sqrt(sum(am[1:] ** 2))
-    thd_percent = 100 * sq / am[1]
+    thd_percent = 100 * sq / am[1] # * THD_sum_I
 
     # TODO TESTING
     # print('WF_NOT_TRANSPOSE: ',wf_sum)

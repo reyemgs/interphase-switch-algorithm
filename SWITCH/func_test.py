@@ -14,8 +14,10 @@ def test_function():
     
     # * calcthd.py testing
     cvof_elec, thd_percent, am = calcthd(vec1)
-    print('cvof_elec:\n', cvof_elec, 
-        '\nthd_percent:\n', thd_percent, 
+    print('cvof_elec:\n', cvof_elec,
+        '\nthd_percent:\n', thd_percent,
         '\nam:\n', am)
+    
+    # * sumthd.py testing
 
 test_function() 
