@@ -1,14 +1,14 @@
 import math
-import numpy as np 
+import numpy as np
 
 # ! Calc_Fitness.m
 def calcfitness(
-    sumof_values,    # * S               
+    sumof_values,    # * S
     thd_sum,         # * T
     numof_switching, # * KpOP
     start_thd,       # * StartTHD
     total_spc        # * Col_OP
-):      
+):
 
     f1 = ((sumof_values[1]**2 + sumof_values[2]**2 + sumof_values[3]**2)
         / ((sumof_values[1] + sumof_values[2] + sumof_values[3])**2))
@@ -22,9 +22,9 @@ def calcfitness(
     f3 *= 0.1
 
     o = f1 + f2 + f3
-    
+
     return f1, f2, f3, o
 
 
-    
+
 

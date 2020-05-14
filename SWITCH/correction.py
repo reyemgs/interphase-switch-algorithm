@@ -1,7 +1,7 @@
 
 # ! Korrection.m
 def correction(
-    inp_vector, 
+    inp_vector,
     pbest_vector
 ):
     n = len(inp_vector)
@@ -10,4 +10,4 @@ def correction(
             inp_vector[i] = pbest_vector[i]
             inp_vector[i+1] = pbest_vector[i+1]
 
-    return inp_vector 
+    return inp_vector

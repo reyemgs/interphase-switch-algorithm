@@ -86,7 +86,7 @@ for j = 1:1
             %% Ввычисляем значения StartSum, StartTHD и целевой функции для исходной комбинации
                 [StartSum, StartTHD, StartKPOP, ~, StartSumOsc] = Sum_THD(kodV);
                 % корректируем THD, если оно не определено (т.е. I=0)
-                 StartTHD(isnan(StartTHD))=[100];
+                StartTHD(isnan(StartTHD))=[100];
                 % значение целевой функции для начальной комбинации
                 StartScore = CostFunction(kodV);
                 % Вычисляем элементы для целевой функции для начальной комбинации
@@ -101,20 +101,20 @@ for j = 1:1
             %% -1- Запускаем алгоритм AlgName
                     A=.25;      % Значение громкости  (constant or decreasing)
                     r=.1;       % Значение часторы (constant or decreasing)
-                 TimeStart = tic;
+                TimeStart = tic;
                     [gBest, gBestScore, ConvergenceCurve] = SwAlg(noP, A, r, noV, Max_iteration, CostFunction, kodV);
-                 TimeElapsed = toc(TimeStart);
+                TimeElapsed = toc(TimeStart);
                     gBest = Korrection( gBest, PreviousV );
-                 ConvergenceCurve = ConvergenceCurve/StartScore; % нормируем значения шагов алгоритма в пределах от 0 до 1
+                ConvergenceCurve = ConvergenceCurve/StartScore; % нормируем значения шагов алгоритма в пределах от 0 до 1
 
             %% Вычиляем параметры лучшего решения
-              [FinSum, FinTHD, per, Raspr_OP, FinSumOsc] = Sum_THD(gBest);
+            [FinSum, FinTHD, per, Raspr_OP, FinSumOsc] = Sum_THD(gBest);
 
-              BestsF(j) = gBestScore/StartScore; % нормирование полученного результата
-              % анализ признака улучшения результата на 10%
-              if BestsF(j)<=0.9
-                  RES(j).Y_N = 1;
-                  Y = Y + 1;
+            BestsF(j) = gBestScore/StartScore; % нормирование полученного результата
+            % анализ признака улучшения результата на 10%
+            if BestsF(j)<=0.9
+                RES(j).Y_N = 1;
+                Y = Y + 1;
               else
                   RES(j).Y_N = 0;
               end
@@ -131,11 +131,11 @@ end
 RES(1).Fmean = mean(BestsF); % оценка математического ожидания на 100 прмерах
 RES(1).Fvar  = var(BestsF);  % оценка дисперсии на 100 примерах
 RES(1).YoK   = Y;            % процент положительных результатов из 100 примеров
-                             % с одинаковым числом однофазных пользователей
+                            % с одинаковым числом однофазных пользователей
 disp(['      Закончил = ',num2str(col_OP),', время ',datestr(now)]);
 ss = strcat('result/BBA_', int2str(col_OP), '.mat');
 save(ss, 'RES');
-end
+end 
 disp('Время выполнения алгоритма: ');
 disp(RES(j).Time);
 disp('Лучшее найденное решение - F(X): ');

@@ -9,15 +9,15 @@ function [ TrueRMSI, ProcTHD, Am ] = Calc_DznI_THD(OscS)
 
   N = length(OscS);   % количество точек в осциллограмме сигнала
   Osc = reshape(OscS(1,:),[N,1]);
-  
+
   %% Вычисление действующего значения тока
   TrueRMSI = sqrt(sum(((OscS.^2)*0.02/(N-1)))/0.02);
-  
+
   % % Расчет амплитуды гармоник
   S = zeros(N,11);
   C = zeros(N,11);
   for i=1:N
-      for k=1:11 %50 
+      for k=1:11 %50
         S(i,k) = sin((2*pi*i*k)/N);
         C(i,k) = cos((2*pi*i*k)/N);
         k = k + 1;
@@ -34,7 +34,7 @@ function [ TrueRMSI, ProcTHD, Am ] = Calc_DznI_THD(OscS)
       Am(k)=sqrt(A(k)^2+B(k)^2)/sqrt(2);
     % k = k + 1;
   end
-  
+
   %% Вычисление THD по формуле от Костинского
   Sq = sqrt(sum(Am(2:end).^2));
   ProcTHD = 100*(Sq)/Am(1);
