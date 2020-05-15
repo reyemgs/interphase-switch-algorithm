@@ -1,34 +1,37 @@
 import numpy as np
-from correction import correction
-from calcthd import calcthd
 from sumthd import sumthd
-from cost import costfunction
+from calcthd import calcthd
 
 # ! TESTS
-def test_function():
-    noV = 6
+
+# ! Sumthd testing
+def test_sumthd():
     V = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/v_struct.txt')
     Izm = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/wf_best.txt')
     kodV = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/kV.txt')
-    #Rd = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/Rd.txt')
-    # * correction.py testing
-    # a = correction(vec1, vec2)
-    # print(a)
+    Rd = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/Rd.txt')
 
-    # * calcthd.py testing
-    # cvof_elec, thd_percent, am = calcthd(wf_vector)
-    # print('cvof_elec:\n', cvof_elec,
-    #     '\nthd_percent:\n', thd_percent,
-    #     '\nam:\n', am)
-
-    # * sumthd.py testing
     sumof_values, thd_percent, numof_switching, wf_sumout = sumthd( kodV,
                                                                     V,
-                                                                    noV,
+                                                                    6,
                                                                     Izm,
+                                                                    Rd,
                                                                     calcthd)
+    print('Start_sum:\n', sumof_values,
+    '\nStart_THD:\n', thd_percent,
+    '\nStartKPOP:\n', numof_switching,
+    '\nStartSumOSC:\n', wf_sumout)
 
-test_function()
+# ! Calcthd testing
+def test_calcthd():
+    Izm = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/wf_best.txt')
+    cvof_elec, thd_percent, am = calcthd(Izm)
+    print(  'cvof_elec:\n', cvof_elec,
+            '\nthd_percent:\n', thd_percent,
+            '\nam:\n', am)
+
+#test_sumthd()
+test_calcthd()
 
 
 
@@ -50,5 +53,5 @@ test_function()
     # v_struct = np.array([[0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0],
     #                     [0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0],
     #                     [0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0]])
-    # wf_vector = np.array([1, 2, 3, 4, 6, 4, 8, 9, 12, 10, 11])
+    #wf_vector = np.array([1, 2, 3, 4, 6, 4, 8, 9, 12, 10, 11])
     # dec_vector = np.array([1, 2, 3, 4, 6, 4, 8, 9, 12, 10, 11])

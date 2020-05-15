@@ -6,7 +6,6 @@ def calcthd(wf_sum): # * OscS
 
     n = len(wf_sum)   # * N
     wf = np.reshape(wf_sum[0:], (n, 1))  # * Osc
-
     cvof_elec = math.sqrt(sum((wf_sum**2) * 0.02 / (n - 1)) / 0.02) # * TrueRMSI
 
     s = np.zeros((n, 11))
@@ -30,7 +29,7 @@ def calcthd(wf_sum): # * OscS
         k += 1
 
     sq = math.sqrt(sum(am[1:] ** 2))
-    thd_percent = 100 * sq / am[1] # * THD_sum_I
+    thd_percent = 100 * (sq) / am[0] # * THD_sum_I
 
     # TODO TESTING
     # print('WF_NOT_TRANSPOSE: ',wf_sum)
