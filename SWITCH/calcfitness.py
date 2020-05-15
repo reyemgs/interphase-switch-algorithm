@@ -3,11 +3,11 @@ import numpy as np
 
 # ! Calc_Fitness.m
 def calcfitness(
-    sumof_values,    # * S
-    thd_sum,         # * T
-    numof_switching, # * KpOP
-    start_thd,       # * StartTHD
-    total_spc        # * Col_OP
+        sumof_values,    # * S
+        thd_sum,         # * T
+        numof_switching, # * KpOP
+        start_thd,       # * StartTHD
+        total_spc        # * Col_OP
 ):
 
     f1 = ((sumof_values[1]**2 + sumof_values[2]**2 + sumof_values[3]**2)

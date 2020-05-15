@@ -3,14 +3,15 @@ from cost import costfunction
 
 # ! MainOneBBA.m
 def main(
-    numof_value,                               # * noV
-    #wf_vector                                 # * Izm
-    costfunction,                              # ? MyCost.m
-    sumthd,                                    # ? Calc_sum_thd.m
-    calcfitness,                               # ? Calc_Fitness.m
-    bba,                                       # ? BBA.m
-    correction                                 # ? Korrection.m
+        numof_value,                               # * noV
+        #wf_vector,                                # * Izm
+        costfunction,                              # ? MyCost.m
+        sumthd,                                    # ? Calc_sum_thd.m
+        calcfitness,                               # ? Calc_Fitness.m
+        bba,                                       # ? BBA.m
+        correction                                 # ? Korrection.m
 ):
+    total_spc = 30                             # * col_OP
     max_iteration = 30                         # * Max_iteration
     numof_agents = 25                          # * noP
     count_wf = 56                              # * Count_Osc
@@ -29,6 +30,8 @@ def main(
 
     v_struct = np.array([])       # * V
     bin_vector = np.array([])     # * kodV
+    best_f = np.array([])         # * BestsF
+    numof_value = total_spc * 2
     y = 0
 
     results = { 'y_n': 0,
@@ -42,7 +45,7 @@ def main(
                 'fvar': 0,
                 'yok': 0
     }
-
+# * for j in range(0, 1)
     v_struct[0,:] = v2[0,:]
     v_struct[1,:] = v3[0,:]
     bin_vector = kv[0,:]
@@ -69,22 +72,15 @@ def main(
 
     fin_sum, fin_thd, switch, distr_spc, fin_wfsum = sumthd(g_best)
 
+    if best_f[j] <= 0.9:
+        results.y_n = 1
+        y += 1
+    else:
+        results.y_n = 0
 
+    results.fmean = np.mean(best_f)
+    results.fvar = np.var(best_f)
+    results.yok = y
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
