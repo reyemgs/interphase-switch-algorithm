@@ -36,7 +36,7 @@ def test_calcthd():
 
 # ! Costfunction testing
 def test_cost():
-    
+
 
 
 test_sumthd()

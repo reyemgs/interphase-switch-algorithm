@@ -8,7 +8,6 @@ def sumthd(
         numof_value,  # * noV
         wf_vector,    # * Izm
         dec_vector    # * Rd
-        #calcthd      # ? calcthd.py
 ):
 
     sumof_values = [0, 0, 0]    #*S
