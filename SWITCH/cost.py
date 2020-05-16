@@ -1,13 +1,18 @@
 import numpy as np
+from sumthd import sumthd
+from calcfitness import calcfitness
 
 # ! My_Cost.m
 def costfunction(
-        vec_x,                 # * Vx (not sure)
+        vec_x,                 # * kodV
         pbest_vector,          # * PreviousV
         pbest_value,           # * PreviousBest
         numof_value,           # * noV
         convergence_curve,     # * MyConvergenceCurve
         all_costs,             # * AllCosts
+        V,
+        Izm,
+        Rd,
         sumthd,                # ? calc_sum_thd.m
         calculationfitness     # ? calc_fitness.m
 ):
@@ -16,7 +21,11 @@ def costfunction(
             vec_x[i] = pbest_vector[i]
             vec_x[i+1] = pbest_vector[i+1]
 
-    sumof_values, thd_percent, numof_switching = sumthd(vec_x) # TODO Вызов Calc_Sum_THD
+    sumof_values, thd_percent, numof_switching = sumthd(vec_x,
+                                                        V,
+                                                        6,
+                                                        Izm,
+                                                        Rd)
 
     thd_percent = np.isnan(thd_percent) # ! Неверно
 
