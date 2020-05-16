@@ -5,11 +5,14 @@ from calcthd import calcthd
 # ! TESTS
 # ! Sumthd testing
 def test_sumthd():
+
     path = 'C:/interphase-switch-algorithm/SWITCH/samples/'
+
     V = np.loadtxt(path + 'v_struct.txt')
-    Izm = np.loadtxt(path + 'wf_best.txt')
+    Izm = np.loadtxt(path + 'Izm.txt')
     kodV = np.loadtxt(path + 'kV.txt')
     Rd = np.loadtxt(path + 'Rd.txt')
+
     sumof_values, thd_percent, numof_switching, wf_sumout = sumthd( kodV, V, 6, Izm, Rd, calcthd)
     print('Start_sum:\n', sumof_values,
     '\nStart_THD:\n', thd_percent,
@@ -18,12 +21,16 @@ def test_sumthd():
 
 # ! Calcthd testing
 def test_calcthd():
+
     path = 'C:/interphase-switch-algorithm/SWITCH/samples/'
-    Izm = np.loadtxt(path + 'wf_best.txt')
+
+    Izm = np.loadtxt(path + 'Izm.txt')
+
     cvof_elec, thd_percent, am = calcthd(Izm)
     print(  'cvof_elec:\n', cvof_elec,
             '\nthd_percent:\n', thd_percent,
             '\nam:\n', am)
 
-test_sumthd()
+for i in range(0, 1):
+    test_sumthd()
 #test_calcthd()

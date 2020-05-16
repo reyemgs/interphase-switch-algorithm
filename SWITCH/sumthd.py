@@ -22,26 +22,28 @@ def sumthd(
             if vec_x[i] == 0:
                 dec_vector[g] = 3
                 wf_sum[2,] = wf_sum[2,] + wf_vector[int(v_struct[1,g]),]
-                # print('WF_SUM:\n', wf_sum[2,])
-                # print('WF_VECTOR\n', wf_vector[int(v_struct[1,g],))
-                # print('V_STRUCT\n', v_struct[1,g])
+                #wf_sum[2,] = wf_sum[2,] + wf_vector[int(v_struct[g,1]),:]
+                #wf_sum[2,] = wf_sum[2,] + wf_vector[0,]
 
         else:
             if vec_x[i] == 1:
                 dec_vector[g] = 2
                 wf_sum[1,] = wf_sum[1,] + wf_vector[int(v_struct[1,g]),]
+                #wf_sum[1,] = wf_sum[1,] + wf_vector[int(v_struct[g,1]),:]
+                #wf_sum[1,] = wf_sum[1,] + wf_vector[1,]
 
             else:
                 dec_vector[g] = 1
                 wf_sum[0,] = wf_sum[0,] + wf_vector[int(v_struct[1,g]),]
-
+                #wf_sum[0,] = wf_sum[0,] + wf_vector[int(v_struct[g,1]),:]
+                #wf_sum[0,] = wf_sum[0,] + wf_vector[2,]
         if dec_vector[g] != v_struct[2,g]:
             numof_switching += 1
 
         g += 1
     thd_percent = [0, 0, 0]
-    sumof_values[0], thd_percent[0], am = calcthd(wf_sum[0,]) # * Вызов calcthd
-    sumof_values[1], thd_percent[1], am = calcthd(wf_sum[1,])
-    sumof_values[2], thd_percent[2], am= calcthd(wf_sum[2,])
+    sumof_values[0], thd_percent[0] = calcthd(wf_sum[0,]) # * Вызов calcthd
+    sumof_values[1], thd_percent[1] = calcthd(wf_sum[1,])
+    sumof_values[2], thd_percent[2] = calcthd(wf_sum[2,])
 
     return sumof_values, thd_percent, numof_switching, wf_sum

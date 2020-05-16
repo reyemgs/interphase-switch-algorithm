@@ -15,18 +15,16 @@ def calcthd(wf_sum): # * OscS
     am = np.zeros(11)
 
     for i in range(0, n):
-        for j in range(0, 11):
-            s[i,j] = np.sin((2 * np.pi * i * j) / n)
-            c[i,j] = np.cos((2 * np.pi * i * j) / n)
-            j += 1
+        for k in range(0, 11):
+            s[i,k] = np.sin((2 * np.pi * i * k) / n)
+            c[i,k] = np.cos((2 * np.pi * i * k) / n)
+            #j += 1
 
     for k in range(0, 11):
         a[k] = (2 / n) * sum(wf[:,0] * s[:,k])
         b[k] = (2 / n) * sum(wf[:,0] * c[:,k])
-        #a[k] = (2 / n) * sum(np.dot(wf[:,0], s[:,k]))
-        #b[k] = (2 / n) * sum(np.dot(wf[:,0], c[:,k]))
         am[k] = math.sqrt(a[k] ** 2 + b[k] ** 2) / math.sqrt(2)
-        k += 1
+       #k += 1
 
     sq = math.sqrt(sum(am[1:] ** 2))
     thd_percent = 100 * (sq) / am[0] # * THD_sum_I
@@ -39,4 +37,4 @@ def calcthd(wf_sum): # * OscS
     # print('\nS: ', np.size(s))
     # print('\nC: ', np.size(c))
 
-    return cvof_elec, thd_percent, am
+    return cvof_elec, thd_percent #, am
