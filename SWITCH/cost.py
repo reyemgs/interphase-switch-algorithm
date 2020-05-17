@@ -13,28 +13,25 @@ def costfunction(
         V,
         Izm,
         Rd,
-        sumthd,                # ? calc_sum_thd.m
-        calculationfitness     # ? calc_fitness.m
 ):
     for i in range(0, numof_value, 2):
         if vec_x[i] == 1 and vec_x[i+1] == 1:
             vec_x[i] = pbest_vector[i]
             vec_x[i+1] = pbest_vector[i+1]
 
-    sumof_values, thd_percent, numof_switching = sumthd(vec_x,
-                                                        V,
-                                                        6,
-                                                        Izm,
-                                                        Rd)
+    (sumof_values,
+    thd_percent,
+    numof_switching) = sumthd(vec_x, V, 6, Izm, Rd)
 
-    thd_percent = np.isnan(thd_percent) # ! Неверно
+    for j in range(0, len(thd_percent)):   # THD_sum_I(isnan(THD_sum_I))=[100];
+        if np.isnan(thd_percent[j]):
+            thd_percent[j] = 100
 
-    o, f1, f2 = calculationfitness(                   # TODO Вызов Calc_Fitness
-                                    sumof_values,     # * S
-                                    thd_percent,      # * THD_sum_I
-                                    numof_switching)  # * KpOP
+    o, f, f2 = calcfitness( sumof_values,     # * S
+                            thd_percent,      # * THD_sum_I
+                            numof_switching, 3)  # * KpOP
     f3 = numof_switching
-    #costs = [all_costs; f3]
+
     if pbest_value > o:
         pbest_value = o
         pbest_vector = vec_x
