@@ -3,8 +3,9 @@ from calcfitness import calcfitness
 from sumthd import sumthd
 from calcthd import calcthd
 from cost import costfunction
-path = 'C:/interphase-switch-algorithm/SWITCH/samples/'
 
+# * Данные
+path = 'C:/interphase-switch-algorithm/SWITCH/samples/'
 kodV = np.loadtxt(path + 'kV.txt')
 V = np.loadtxt(path + 'V.txt')
 Izm = np.loadtxt(path + 'Izm.txt')
@@ -43,8 +44,6 @@ def test_calcfitness():
             '\nF2: ', f2,
             '\nF3: ', f3,
             '\no: ', o)
-
-
 
 test_sumthd()
 #test_calcthd()

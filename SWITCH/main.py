@@ -1,10 +1,14 @@
 import numpy as np
+
+from correction import correction
+from calcfitness import calcfitness
+from sumthd import sumthd
 from cost import costfunction
 
 # ! MainOneBBA.m
 def main(
         numof_value,                               # * noV
-        #wf_vector,                                # * Izm
+        wf_vector,                                 # * Izm
         costfunction,                              # ? MyCost.m
         sumthd,                                    # ? Calc_sum_thd.m
         calcfitness,                               # ? Calc_Fitness.m
@@ -43,8 +47,8 @@ def main(
                 'numof_switch': 0,
                 'fmean': 0,
                 'fvar': 0,
-                'yok': 0
-    }
+                'yok': 0}
+
 # * for j in range(0, 1)
     v_struct[0,:] = v2[0,:]
     v_struct[1,:] = v3[0,:]

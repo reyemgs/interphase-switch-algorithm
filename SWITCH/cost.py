@@ -27,10 +27,11 @@ def costfunction(
         if np.isnan(thd_percent[j]):
             thd_percent[j] = 100
 
-    o, f, f2 = calcfitness( sumof_values,     # * S
+    f = [0, 0, 0]
+    o, f[0], f[1] = calcfitness( sumof_values,     # * S
                             thd_percent,      # * THD_sum_I
                             numof_switching, 3)  # * KpOP
-    f3 = numof_switching
+    f[2] = numof_switching
 
     if pbest_value > o:
         pbest_value = o
