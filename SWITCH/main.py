@@ -22,11 +22,10 @@ def main(
     count_wf = 56                           # * Count_Osc
     wf_vector = np.zeros((count_wf, 104))   # * Izm
     y = 0                                   # * Y
+    s = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/Izm.txt')
 
     for i in range(0, 56):
-        s = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/Izm.txt')
-        wf_vector[i, :] = s
-        s = []
+        wf_vector[i,] = s[i,]
 
     # * SamplesV
     v2 = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/v2.txt')
@@ -54,9 +53,9 @@ def main(
                 'yok': 0}                   # * YoK
 
     #Обработка примеров
-    v_struct[0,:] = v2[0,:]
-    v_struct[1,:] = v3[0,:]
-    bin_vector = kv[0,:]
+    v_struct[0,] = v2[0:]
+    v_struct[0,] = v3[0:]
+    bin_vector = kv[0:]
 
     # * Вызов sumthd
     (start_sum, start_thd,
@@ -74,7 +73,8 @@ def main(
                                 start_sum, start_thd, start_nswitch)
 
     # * Вызов calcfitness
-    start_f1, start_f2 = calcfitness(start_sum, start_thd, start_nswitch, total_spc)
+    start_f1, start_f2 = calcfitness(start_sum, start_thd,
+                                    start_nswitch, total_spc)
 
     pbest_vector = bin_vector
     pbest_value = start_score
