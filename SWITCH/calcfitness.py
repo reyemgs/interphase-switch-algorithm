@@ -23,8 +23,8 @@ def calcfitness(
 
     o = f1 + f2 + f3
 
-    #return o, f1, f2#, f3
-    return f1, f2
+    #return o, f1, f2, f3
+    return o, f1, f2
 
 
 

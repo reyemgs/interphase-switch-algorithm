@@ -1,0 +1,70 @@
+import numpy as np
+import matplotlib
+from cost import costfunction
+
+def bba(n, A, r, d, Max_iter, kodV,
+        pbest_vector, pbest_value,v_struct,
+        wf_vector, Rd):
+
+    Q_min = 0
+    Q_max = 2
+    N_iter = -1
+    Q = np.zeros((n, 1))
+    V = np.zeros((n, d))
+    Sol = np.zeros((n, d))
+    Fitness = np.zeros(n)
+    cg_curve = np.zeros(Max_iter)
+
+    for i in range(0, n):
+        for j in range(0, d):
+            if np.random.random_sample() <= 0.5:
+                Sol[i, j] = 0
+            else:
+                Sol[i, j] = 1
+
+    Sol[0,] = kodV
+
+    for i in range(0, n):
+        Fitness[i] = costfunction(Sol[i,], pbest_vector,
+                                pbest_value, d, v_struct,
+                                wf_vector, Rd)
+
+    fmin, I = Fitness.min(0), Fitness.argmin(0)
+    best = Sol[I,:]
+
+    while N_iter < Max_iter - 1:
+        N_iter += 1
+        cg_curve[N_iter] = fmin
+
+        for i in range(0, n):
+            for j in range(0, d):
+                Q[i] = Q_min + (Q_min - Q_max) * np.random.random_sample()
+                V[i, j] = V[i, j] + (Sol[i, j] - best[j]) * Q[i]
+                V_shaped_transfer_function = np.abs((2 / np.pi) * np.arctan2((np.pi / 2) * V[i,j], 0))
+
+                if np.random.random_sample() < V_shaped_transfer_function:
+                    Sol[i, j] = not Sol[i, j]
+                else:
+                    Sol[i, j] = Sol[i, j]
+
+                if np.random.random_sample() > r:
+                    Sol[i, j] = best[j]
+
+            Fnew = costfunction(Sol[i,], pbest_vector,
+                                pbest_value, d, v_struct,
+                                wf_vector, Rd)
+
+            if (Fnew <= Fitness[i]) and (np.random.random_sample() < A):
+                Sol[i,] = Sol[i,]
+                Fitness[i] = Fnew
+
+            if Fnew <= fmin:
+                best = Sol[i,]
+                fmin = Fnew
+        #print('Number of evaluations: ', N_iter)
+        #print('fmin = ', fmin)
+
+    print("\nMatrix f_min:\n", cg_curve)
+    print("\nBest values:\n", best)
+    print("\nLen of array:\n", len(cg_curve))
+    return best, fmin, cg_curve

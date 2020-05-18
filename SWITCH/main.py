@@ -3,6 +3,7 @@ from correction import correction
 from calcfitness import calcfitness
 from sumthd import sumthd
 from cost import costfunction
+from binbatalg import bba
 Rd = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/Rd.txt')
 # ! MainOneBBA.m
 def main(
@@ -53,13 +54,14 @@ def main(
                 'yok': 0}                   # * YoK
 
     #Обработка примеров
-    v_struct[0,] = v2[0:]
-    v_struct[0,] = v3[0:]
-    bin_vector = kv[0:]
+    v_struct[0,] = v2
+    v_struct[1,] = v3
+    bin_vector = kv
 
     # * Вызов sumthd
     (start_sum, start_thd,
-    start_nswitch, start_wfsum) = sumthd(bin_vector, v_struct,
+    start_nswitch, dec_vector,
+    start_wfsum) = sumthd(bin_vector, v_struct,                         # TODO Calcthd
                                         numof_value, wf_vector, Rd)
 
     # Корректируем THD
@@ -68,12 +70,12 @@ def main(
             start_thd[j] = 100
 
     # * Вызов costfunction
-    start_score = costfunction(bin_vector, bin_vector, pbest_value,
-                                numof_value, v_struct, wf_vector, Rd,
-                                start_sum, start_thd, start_nswitch)
+    start_score = costfunction(bin_vector, bin_vector, pbest_value,     # TODO Sumthd, Calcfitness
+                                numof_value, v_struct, wf_vector, Rd)#,    # ? Caclthd
+                                #start_sum, start_thd, start_nswitch)
 
     # * Вызов calcfitness
-    start_f1, start_f2 = calcfitness(start_sum, start_thd,
+    start_f1, start_f2 = calcfitness(start_sum, start_thd,              # TODO Ничего не вызывается
                                     start_nswitch, total_spc)
 
     pbest_vector = bin_vector
@@ -82,23 +84,31 @@ def main(
     A = .25
     r = .1
 
-    g_best, g_bestscore, convergence_curve = bba(numof_agents, # ? Вызов BBA
-                                                A, r, numof_agents,
-                                                max_iteration,
-                                                costfunction,
-                                                bin_vector)
+    # * Вызов bba
+    (g_best, g_bestscore,
+    convergence_curve) = bba(numof_agents, A, r, numof_value,           # TODO Costfunction
+                            max_iteration, bin_vector,                     # ? Sumthd, Calcfitness
+                            pbest_vector, pbest_value,                     # * Calcthd
+                            v_struct, wf_vector, Rd)
+
+    # * Вызов correction
     g_best = correction(g_best, pbest_vector)
 
     convergence_curve /= start_score
 
-    fin_sum, fin_thd, switch, distr_spc, fin_wfsum = sumthd(g_best)
+    (fin_sum, fin_thd,
+    switch, distr_spc, fin_wfsum) = sumthd(g_best, v_struct, numof_agents,
+                                            wf_vector, Rd)
 
-    if best_f[j] <= 0.9:
+    if best_f[0] <= 0.9:
         results.y_n = 1
         y += 1
     else:
         results.y_n = 0
-
+    results.fbest = best_f[0]
+    results.fsteps = convergence_curve
+    results.fin_vector = g_best
+    results.distr_spc = distr_spc
     results.fmean = np.mean(best_f)
     results.fvar = np.var(best_f)
     results.yok = y

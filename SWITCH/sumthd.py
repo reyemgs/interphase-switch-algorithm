@@ -42,4 +42,4 @@ def sumthd(
     sumof_values[1], thd_percent[1] = calcthd(wf_sum[1,])
     sumof_values[2], thd_percent[2] = calcthd(wf_sum[2,])
 
-    return sumof_values, thd_percent, numof_switching, wf_sum
+    return sumof_values, thd_percent, numof_switching, dec_vector, wf_sum
