@@ -35,7 +35,7 @@ def test_calcthd():
             '\nam:\n', am)
 
 
-# ! Costfunction testing
+# ! Calcfitness testing
 def test_calcfitness():
     # Вызов
     f1, f2, f3, o = calcfitness(StartSum, StartTHD, 0, 3)
@@ -45,6 +45,14 @@ def test_calcfitness():
             '\nF3: ', f3,
             '\no: ', o)
 
-test_sumthd()
-#test_calcthd()
-#test_calcfitness()
+
+# ! Costfunction testing
+def test_costfunction():
+    # Вызов
+    o = costfunction(kodV, kodV, 55, 6, V, Izm, Rd, StartSum, StartTHD, 0)
+    print(o)
+
+# test_sumthd()
+# test_calcthd()
+# test_calcfitness()
+# test_costfunction()

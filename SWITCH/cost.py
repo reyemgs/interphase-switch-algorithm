@@ -8,11 +8,14 @@ def costfunction(
         pbest_vector,          # * PreviousV
         pbest_value,           # * PreviousBest
         numof_value,           # * noV
-        convergence_curve,     # * MyConvergenceCurve
-        all_costs,             # * AllCosts
-        V,
-        Izm,
-        Rd,
+        #convergence_curve,    # * MyConvergenceCurve
+        #all_costs,            # * AllCosts
+        V,                     # ? sumthd
+        Izm,                   # ? sumthd
+        Rd,                    # ? sumthd
+        sumof_values,          # ? calcfitness
+        thd_percent,           # ? calcfitness
+        numof_switching        # ? calcfitness
 ):
     for i in range(0, numof_value, 2):
         if vec_x[i] == 1 and vec_x[i+1] == 1:
@@ -28,16 +31,20 @@ def costfunction(
             thd_percent[j] = 100
 
     f = [0, 0, 0]
+
     o, f[0], f[1] = calcfitness( sumof_values,     # * S
                             thd_percent,      # * THD_sum_I
                             numof_switching, 3)  # * KpOP
+
     f[2] = numof_switching
+
+    #costs = np.array([all_costs, f])   # TODO Costs
 
     if pbest_value > o:
         pbest_value = o
         pbest_vector = vec_x
 
-    convergence_curve = [convergence_curve, pbest_value]
+    #np.append(convergence_curve, pbest_value)   # TODO MyConvergenceCurve
 
     return o
 

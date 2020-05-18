@@ -41,5 +41,5 @@ def sumthd(
     sumof_values[0], thd_percent[0] = calcthd(wf_sum[0,]) # * Вызов calcthd
     sumof_values[1], thd_percent[1] = calcthd(wf_sum[1,])
     sumof_values[2], thd_percent[2] = calcthd(wf_sum[2,])
-    
+
     return sumof_values, thd_percent, numof_switching, wf_sum
