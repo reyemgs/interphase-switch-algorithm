@@ -38,7 +38,7 @@ def test_sumthd():
 # ! Calcthd testing
 def test_calcthd():
     # Вызов
-    cvof_elec, thd_percent, am = calcthd(Izm)
+    cvof_elec, thd_percent, am = calcthd(kodV)
     # Вывод
     print(  'cvof_elec:\n', cvof_elec,
             '\nthd_percent:\n', thd_percent,
@@ -74,8 +74,8 @@ def test_bba():
     plt.plot(cg_curve)
     plt.show()
 
-test_sumthd()
-# test_calcthd()
+#test_sumthd()
+test_calcthd()
 #test_calcfitness()
 #test_costfunction()
 #test_bba()

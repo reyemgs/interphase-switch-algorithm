@@ -29,34 +29,37 @@ def main(
         wf_vector[i,] = s[i,]
 
     # * SamplesV
+    #v = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/V.txt')
     v2 = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/v2.txt')
     v3 = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/v3.txt')
     kv = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/kV.txt')
 
     start_sum = np.array([])                # * StartSum
     start_thd = np.array([])                # * StartTHD
-    v_struct = np.array([])                 # * V
+    v_struct = np.array([[]])               # * V
     bin_vector = np.array([])               # * kodV
     best_f = np.array([])                   # * BestsF
 
     pbest_vector = bin_vector
     pbest_value = 0
 
-    results = { 'y_n': 0,                   # * Y_N
-                'time': 0,                  # * Time
-                'fbest': 0,                 # * Fbest
-                'fsteps': 0,                # * Fsteps
-                'fin_vector': 0,            # * FinVect
-                'distr_spc': 0,             # * RasprOP
-                'numof_switch': 0,          # * KpOP
-                'fmean': 0,                 # * Fmean
-                'fvar': 0,                  # * Fvar
-                'yok': 0}                   # * YoK
+    #Результаты
+    y_n = 0                                 # * Y_N
+    time = 0                                # * Time
+    fbest = 0                               # * Fbest
+    fsteps = 0                              # * Fsteps
+    fin_vector = 0                          # * FinVect
+    distr_spc = 0                           # * RasprOP
+    numof_switch = 0                        # * KpOP
+    fmean = 0                               # * Fmean
+    fvar = 0                                # * Fvar
+    yok = 0                                 # * YoK
 
     #Обработка примеров
-    v_struct[0,] = v2
-    v_struct[1,] = v3
+    v_struct = np.array([[0, 0, 0], v2, v3])
+    print(v_struct)
     bin_vector = kv
+
 
     # * Вызов sumthd
     (start_sum, start_thd,
@@ -75,7 +78,7 @@ def main(
                                 #start_sum, start_thd, start_nswitch)
 
     # * Вызов calcfitness
-    start_f1, start_f2 = calcfitness(start_sum, start_thd,              # TODO Ничего не вызывается
+    O ,start_f1, start_f2 = calcfitness(start_sum, start_thd,              # TODO Ничего не вызывается
                                     start_nswitch, total_spc)
 
     pbest_vector = bin_vector
@@ -93,25 +96,26 @@ def main(
 
     # * Вызов correction
     g_best = correction(g_best, pbest_vector)
-
+    print('\ngBest: ', g_best)
     convergence_curve /= start_score
 
     (fin_sum, fin_thd,
-    switch, distr_spc, fin_wfsum) = sumthd(g_best, v_struct, numof_agents,
+    switch, distr_spc, fin_wfsum) = sumthd(g_best, v_struct, numof_value,
                                             wf_vector, Rd)
-
+    best_f = np.append(g_best, g_best/start_score)
     if best_f[0] <= 0.9:
-        results.y_n = 1
+        y_n = 1
         y += 1
     else:
-        results.y_n = 0
-    results.fbest = best_f[0]
-    results.fsteps = convergence_curve
-    results.fin_vector = g_best
-    results.distr_spc = distr_spc
-    results.fmean = np.mean(best_f)
-    results.fvar = np.var(best_f)
-    results.yok = y
+        y_n = 0
+
+    fbest = best_f[0]
+    fsteps = convergence_curve
+    fin_vector = g_best
+    distr_spc = distr_spc
+    fmean = np.mean(best_f)
+    fvar = np.var(best_f)
+    yok = y
 
 if __name__ == "__main__":
     main()

@@ -11,7 +11,7 @@ function [ TrueRMSI, ProcTHD, Am ] = Calc_DznI_THD(OscS)
   Osc = reshape(OscS(1,:),[N,1]);
 
   %% Вычисление действующего значения тока
-  TrueRMSI = sqrt(sum(((OscS.^2)*0.02/(N-1)))/0.02);
+  TrueRMSI = sqrt(sum( ((OscS.^2)*0.02/(N-1)) )/0.02);
 
   % % Расчет амплитуды гармоник
   S = zeros(N,11);
