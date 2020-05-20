@@ -2,10 +2,19 @@ import numpy as np
 import matplotlib
 from cost import costfunction
 
-def bba(n, A, r, d, Max_iter, kodV,
-        pbest_vector, pbest_value,v_struct,
-        wf_vector, Rd):
-
+def bba(
+    n,                # * noP
+    A,                # * A
+    r,                # * r
+    d,                # * noV
+    Max_iter,         # * Max_iteration
+    kodV,             # * kodV
+    pbest_vector,     # * PreviousV
+    pbest_value,      # * PreviousBest
+    v_struct,         # * V
+    wf_vector,        # * Izm
+    Rd                # * Rd
+):
     Q_min = 0
     Q_max = 2
     N_iter = -1
@@ -25,7 +34,7 @@ def bba(n, A, r, d, Max_iter, kodV,
     Sol[0,] = kodV
 
     for i in range(0, n):
-        Fitness[i], tmp = costfunction(Sol[i,], pbest_vector,
+        Fitness[i] = costfunction(Sol[i,], pbest_vector,
                                 pbest_value, d, v_struct,
                                 wf_vector, Rd)
 
@@ -50,7 +59,7 @@ def bba(n, A, r, d, Max_iter, kodV,
                 if np.random.random_sample() > r:
                     Sol[i, j] = best[j]
 
-            Fnew, tmp = costfunction(Sol[i,], pbest_vector,
+            Fnew = costfunction(Sol[i,], pbest_vector,
                                 pbest_value, d, v_struct,
                                 wf_vector, Rd)
 

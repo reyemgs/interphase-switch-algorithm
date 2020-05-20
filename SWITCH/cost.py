@@ -45,7 +45,7 @@ def costfunction(
 
     #np.append(convergence_curve, pbest_value)   # TODO MyConvergenceCurve
 
-    return o, dec_vector
+    return o
 
 
 
