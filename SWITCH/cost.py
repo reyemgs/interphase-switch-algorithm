@@ -37,14 +37,15 @@ def costfunction(
     f[2] = numof_switching
 
     #costs = np.array([all_costs, f])   # TODO Costs
-
+    if np.isnan(pbest_value):
+        pbest_vector = o
     if pbest_value > o:
         pbest_value = o
         pbest_vector = vec_x
 
     #np.append(convergence_curve, pbest_value)   # TODO MyConvergenceCurve
 
-    return o
+    return o, dec_vector
 
 
 

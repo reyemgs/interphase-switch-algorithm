@@ -25,7 +25,7 @@ def bba(n, A, r, d, Max_iter, kodV,
     Sol[0,] = kodV
 
     for i in range(0, n):
-        Fitness[i] = costfunction(Sol[i,], pbest_vector,
+        Fitness[i], tmp = costfunction(Sol[i,], pbest_vector,
                                 pbest_value, d, v_struct,
                                 wf_vector, Rd)
 
@@ -50,7 +50,7 @@ def bba(n, A, r, d, Max_iter, kodV,
                 if np.random.random_sample() > r:
                     Sol[i, j] = best[j]
 
-            Fnew = costfunction(Sol[i,], pbest_vector,
+            Fnew, tmp = costfunction(Sol[i,], pbest_vector,
                                 pbest_value, d, v_struct,
                                 wf_vector, Rd)
 
@@ -64,7 +64,5 @@ def bba(n, A, r, d, Max_iter, kodV,
         #print('Number of evaluations: ', N_iter)
         #print('fmin = ', fmin)
 
-    print("\nMatrix f_min:\n", cg_curve)
-    print("\nBest values:\n", best)
-    print("\nLen of array:\n", len(cg_curve))
+
     return best, fmin, cg_curve

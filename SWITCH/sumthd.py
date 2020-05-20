@@ -37,7 +37,8 @@ def sumthd(
 
         g += 1
 
-    thd_percent = [0, 0, 0]
+    thd_percent = np.array([0.0, 0.0, 0.0])
+
     sumof_values[0], thd_percent[0], am = calcthd(wf_sum[0,]) # * Вызов calcthd
     sumof_values[1], thd_percent[1], am = calcthd(wf_sum[1,])
     sumof_values[2], thd_percent[2], am = calcthd(wf_sum[2,])

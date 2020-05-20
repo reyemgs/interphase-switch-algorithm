@@ -3,10 +3,9 @@ import numpy as np
 
 # ! Calc_Fitness.m
 def calcfitness(
-        sumof_values,    # * S
-        thd_sum,         # * T
+        sumof_values,    # * StartSum
+        thd_sum,         # * StartTHD
         numof_switching, # * KpOP
-        #start_thd,       # * StartTHD
         total_spc        # * Col_OP
 ):
     total_spc = 3
