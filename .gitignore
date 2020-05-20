@@ -1,4 +1,4 @@
 test/
-switch/MATLAB_SWITCH/
-switch/bba/MATLAB_BBA/
-switch/bpso/MATLAB_BPSO/
+MATLAB_SWITCH/
+bba/MATLAB_BBA/
+bpso/MATLAB_BPSO/
