@@ -3,7 +3,7 @@ import numpy as np
 np.seterr(divide='ignore', invalid='ignore')
 
 # ! Calc_DznI_THD.m
-def calcthd(wf_sum):                                 # * OscS
+def calcthd(wf_sum):
     n = len(wf_sum)                                  # * N
     wf = np.reshape(wf_sum, (np.size(wf_sum), 1))    # * Osc
     #wf = wf_sum.T
