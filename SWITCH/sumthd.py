@@ -9,7 +9,6 @@ def sumthd(
         wf_vector,    # * Izm
         dec_vector    # * Rd
 ):
-
     sumof_values = [0, 0, 0]    #*S
     wf_sum = np.zeros((3,104))  #*Osc_sum
     numof_switching = 0         #*perecl

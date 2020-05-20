@@ -1,10 +1,10 @@
 import math
 import numpy as np
 np.seterr(divide='ignore', invalid='ignore')
-# ! Calc_DznI_THD.m
-def calcthd(wf_sum):                        # * OscS
 
-    n = len(wf_sum)                         # * N
+# ! Calc_DznI_THD.m
+def calcthd(wf_sum):                                 # * OscS
+    n = len(wf_sum)                                  # * N
     wf = np.reshape(wf_sum, (np.size(wf_sum), 1))    # * Osc
     #wf = wf_sum.T
 
@@ -32,6 +32,6 @@ def calcthd(wf_sum):                        # * OscS
     sq = math.sqrt(sum(am[1:] ** 2))
     # print('sq: ', sq)
     #print('am[0]: ', am[0])
-    thd_percent = 100 * sq / am[0]           # * THD_sum_I
+    thd_percent = 100 * sq / am[0]                   # * THD_sum_I
 
     return cvof_elec, thd_percent , am

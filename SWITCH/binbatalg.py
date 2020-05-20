@@ -73,5 +73,4 @@ def bba(
         #print('Number of evaluations: ', N_iter)
         #print('fmin = ', fmin)
 
-
     return best, fmin, cg_curve

@@ -5,7 +5,7 @@ from sumthd import sumthd
 from calcthd import calcthd
 from cost import costfunction
 from binbatalg import bba
-from main import iswalg
+from swalg import iswalg
 
 # * Данные
 path = 'C:/interphase-switch-algorithm/SWITCH/samples/'
