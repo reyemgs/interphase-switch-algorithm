@@ -2,8 +2,15 @@ import numpy as np
 import matplotlib
 from tqdm import tqdm
 
-def binary_bat_algorithm(n, A, r, d, Max_iter, CostFunction, kodV):
-
+def binary_bat_algorithm(
+        n,
+        A,
+        r,
+        d,
+        Max_iter,
+        CostFunction,
+        kodV
+):
     Q_min = 0
     Q_max = 2
     N_iter = -1

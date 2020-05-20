@@ -3,17 +3,17 @@ import matplotlib
 from cost import costfunction
 
 def bba(
-    n,                # * noP
-    A,                # * A
-    r,                # * r
-    d,                # * noV
-    Max_iter,         # * Max_iteration
-    kodV,             # * kodV
-    pbest_vector,     # * PreviousV
-    pbest_value,      # * PreviousBest
-    v_struct,         # * V
-    wf_vector,        # * Izm
-    Rd                # * Rd
+        n,                # * noP
+        A,                # * A
+        r,                # * r
+        d,                # * noV
+        Max_iter,         # * Max_iteration
+        kodV,             # * kodV
+        pbest_vector,     # * PreviousV
+        pbest_value,      # * PreviousBest
+        v_struct,         # * V
+        wf_vector,        # * Izm
+        Rd                # * Rd
 ):
     Q_min = 0
     Q_max = 2

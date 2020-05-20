@@ -3,7 +3,13 @@ import matplotlib
 import math
 from tqdm import tqdm
 
-def binary_particle_swarm_optimization(noP, Max_iteration, BPSO_num, CostFunction, noV):
+def binary_particle_swarm_optimization(
+        noP,
+        Max_iteration,
+        BPSO_num,
+        CostFunction,
+        noV
+):
     w = 2
     wMax = 0.9
     wMin = 0.4
