@@ -21,8 +21,8 @@ def calcthd(wf_sum):
     #         s[i,k] = np.sin((2 * np.pi * i * k) / n)
     #         c[i,k] = np.cos((2 * np.pi * i * k) / n)
     #         #j += 1
-    s = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/S.txt')
-    c = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/C.txt')
+    s = np.loadtxt('C:/interphase-switch-algorithm/samples/S.txt')
+    c = np.loadtxt('C:/interphase-switch-algorithm/samples/C.txt')
     for k in range(0, 11):
         a[k] = (2 / n) * sum(wf[:,0] * s[:,k])
         b[k] = (2 / n) * sum(wf[:,0] * c[:,k])

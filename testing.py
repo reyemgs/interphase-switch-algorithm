@@ -8,7 +8,7 @@ from binbatalg import bba
 from swalg import iswalg
 
 # * Данные
-path = 'C:/interphase-switch-algorithm/SWITCH/samples/'
+path = 'C:/interphase-switch-algorithm/samples/'
 kodV = np.loadtxt(path + 'kV.txt')
 V = np.loadtxt(path + 'V.txt')
 Rd = np.loadtxt(path + 'Rd.txt')
@@ -79,13 +79,28 @@ def test_bba():
     plt.plot(cg_curve)
     plt.show()
 
+
+# ! Iswalg testing
 def test_iswalg():
     iswalg()
 
 
-#test_sumthd()
+# ! Plot testing
+def test_plot():
+    (sumof_values, thd_percent,
+    numof_switching, dec_vector,
+    wf_sumout) = sumthd(kodV, V, 6, Izm, Rd)
+
+    fig, wf = plt.subplots()
+    wf.plot(wf_sumout[3,], label = 'wf')
+    #wf.plot(Izm[0,], label = 'Izm')
+    wf.legend()
+    plt.show()
+
+test_sumthd()
 #test_calcthd()
 #test_calcfitness()
 #test_costfunction()
 #test_bba()
-test_iswalg()
+#test_iswalg()
+#test_plot()

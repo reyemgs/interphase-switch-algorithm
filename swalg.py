@@ -4,7 +4,7 @@ from calcfitness import calcfitness
 from sumthd import sumthd
 from cost import costfunction
 from binbatalg import bba
-Rd = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/Rd.txt')
+Rd = np.loadtxt('C:/interphase-switch-algorithm/samples/Rd.txt')
 
 # ! MainOneBBA.m
 def iswalg():
@@ -16,16 +16,16 @@ def iswalg():
     count_wf = 56                           # * Count_Osc
     wf_vector = np.zeros((count_wf, 104))   # * Izm
     y = 0                                   # * Y
-    s = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/Izm.txt')
+    s = np.loadtxt('C:/interphase-switch-algorithm/samples/Izm.txt')
 
     for i in range(0, 56):
         wf_vector[i,] = s[i,]
 
     # * SamplesV
     #v = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/V.txt')
-    v2 = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/v2.txt')
-    v3 = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/v3.txt')
-    kv = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/kV.txt')
+    v2 = np.loadtxt('C:/interphase-switch-algorithm/samples/v2.txt')
+    v3 = np.loadtxt('C:/interphase-switch-algorithm/samples/v3.txt')
+    kv = np.loadtxt('C:/interphase-switch-algorithm/samples/kV.txt')
     start_sum = np.array([])                # * StartSum
     start_thd = np.array([])                # * StartTHD
     v_struct = np.array([[]])               # * V
@@ -35,6 +35,7 @@ def iswalg():
     pbest_value = np.nan
     pbest_vector = bin_vector
 
+    print('Считаю для КОП = ', total_spc)
     #Результаты
     y_n = 0                                 # * Y_N
     time = 0                                # * Time
@@ -49,8 +50,8 @@ def iswalg():
 
     #Обработка примеров
     v_struct = np.array([[0, 0, 0], v2, v3])
-
     bin_vector = kv
+
 
     # * Вызов sumthd
     (start_sum, start_thd,
@@ -88,10 +89,12 @@ def iswalg():
     convergence_curve) = bba(numof_agents, A, r, numof_value, max_iteration, bin_vector,
                             pbest_vector, pbest_value, v_struct, wf_vector, Rd)
 
+
     # * Вызов correction
     g_best = correction(g_best, pbest_vector)
-
     convergence_curve /= start_score
+
+
     # *Вызов sumthd
     (fin_sum, fin_thd,
     switch, distr_spc, fin_wfsum) = sumthd(g_best, v_struct, numof_value,
@@ -128,3 +131,6 @@ def iswalg():
         '\nFmean:', fmean,
         '\nFvar:', fvar,
         '\nYoK:', yok)
+    print(len(fin_wfsum[0,]))
+    print(len(wf_vector[0,]))
+    return fin_wfsum[0,], start_wfsum[0,]
