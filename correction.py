@@ -1,4 +1,4 @@
-
+import numpy as np
 # ! Korrection.m
 def correction(
         inp_vector,   # * g_best
