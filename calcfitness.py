@@ -18,7 +18,7 @@ def calcfitness(
     f2 *= 0.2
     f3 *= 0.1
     o = f1 + f2 + f3
-    #return o, f1, f2, f3
+
     return o, f1, f2
 
 

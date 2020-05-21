@@ -84,23 +84,9 @@ def test_bba():
 def test_iswalg():
     iswalg()
 
-
-# ! Plot testing
-def test_plot():
-    (sumof_values, thd_percent,
-    numof_switching, dec_vector,
-    wf_sumout) = sumthd(kodV, V, 6, Izm, Rd)
-
-    fig, wf = plt.subplots()
-    wf.plot(wf_sumout[3,], label = 'wf')
-    #wf.plot(Izm[0,], label = 'Izm')
-    wf.legend()
-    plt.show()
-
-test_sumthd()
+#test_sumthd()
 #test_calcthd()
 #test_calcfitness()
 #test_costfunction()
 #test_bba()
 #test_iswalg()
-#test_plot()

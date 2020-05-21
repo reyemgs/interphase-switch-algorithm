@@ -1,14 +1,15 @@
 import numpy as np
+import scipy.io as sio
 from correction import correction
 from calcfitness import calcfitness
 from sumthd import sumthd
 from cost import costfunction
 from binbatalg import bba
-Rd = np.loadtxt('C:/interphase-switch-algorithm/samples/Rd.txt')
-
+#Rd = np.loadtxt('C:/interphase-switch-algorithm/samples/Rd.txt')
+Rd = np.array([1, 2, 3])
 # ! MainOneBBA.m
 def iswalg():
-    # Данные
+    # Данные                                # TODO for сol_OP = 3:30
     total_spc = 3                           # * col_OP
     max_iteration = 30                      # * Max_iteration
     numof_agents = 25                       # * noP
@@ -22,20 +23,22 @@ def iswalg():
         wf_vector[i,] = s[i,]
 
     # * SamplesV
-    #v = np.loadtxt('C:/interphase-switch-algorithm/SWITCH/samples/V.txt')
-    v2 = np.loadtxt('C:/interphase-switch-algorithm/samples/v2.txt')
-    v3 = np.loadtxt('C:/interphase-switch-algorithm/samples/v3.txt')
-    kv = np.loadtxt('C:/interphase-switch-algorithm/samples/kV.txt')
+    struct = sio.loadmat('C:/interphase-switch-algorithm/samples/V.mat')
+    samples_v = struct['SamlesV']
+    v2 = samples_v['V2']
+    v3 = samples_v['V3']
+    kv = samples_v['kV']
+    v_struct = np.zeros((3, total_spc))     # * V
+
     start_sum = np.array([])                # * StartSum
     start_thd = np.array([])                # * StartTHD
-    v_struct = np.array([[]])               # * V
     bin_vector = np.array([])               # * kodV
     best_f = np.array([])                   # * BestsF
 
     pbest_value = np.nan
     pbest_vector = bin_vector
 
-    print('Считаю для КОП = ', total_spc)
+    print('Calculated for TSPC = ', total_spc)
     #Результаты
     y_n = 0                                 # * Y_N
     time = 0                                # * Time
@@ -49,8 +52,10 @@ def iswalg():
     yok = 0                                 # * YoK
 
     #Обработка примеров
-    v_struct = np.array([[0, 0, 0], v2, v3])
-    bin_vector = kv
+    print('Processing the ', 1 ,'example')
+    v_struct[1,] = v2[0, total_spc - 1][0,]
+    v_struct[2,] = v3[0, total_spc - 1][0,]
+    bin_vector = kv[0, total_spc - 1][0,]
 
 
     # * Вызов sumthd
@@ -131,6 +136,5 @@ def iswalg():
         '\nFmean:', fmean,
         '\nFvar:', fvar,
         '\nYoK:', yok)
-    print(len(fin_wfsum[0,]))
-    print(len(wf_vector[0,]))
+
     return fin_wfsum[0,], start_wfsum[0,]

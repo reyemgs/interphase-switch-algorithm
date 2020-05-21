@@ -9,7 +9,7 @@ def main():
     wf.plot(fin_curve, label = 'fin_curve', linestyle = ':', linewidth = 2)
     wf.plot(start_curve, label = 'start_curve', linestyle = '--', linewidth = 4)
 
-    fig.set_figwidth(12)
+    fig.set_figwidth(6)
     fig.set_figheight(6)
 
     plt.show()
