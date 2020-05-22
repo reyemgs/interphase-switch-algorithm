@@ -39,7 +39,6 @@ def iswalg():
     best_f = np.array([])                   # * BestsF
 
     pbest_value = np.nan
-    pbest_vector = bin_vector
 
     print('\nCalculated for TSPC = ', total_spc)
     #Результаты
@@ -59,7 +58,8 @@ def iswalg():
     v_struct[1,] = v2[0, total_spc - 1][0,]
     v_struct[2,] = v3[0, total_spc - 1][0,]
     bin_vector = kv[0, total_spc - 1][0,]
-    print(v_struct)
+    pbest_vector = bin_vector
+
     # * Вызов sumthd
     (start_sum, start_thd,
     start_nswitch, dec_vector, start_wfsum) = sumthd(bin_vector, v_struct,
@@ -77,8 +77,9 @@ def iswalg():
             start_thd[j] = 100
 
     # * Вызов costfunction
-    start_score = costfunction(bin_vector, bin_vector, pbest_value,
-                                numof_value, v_struct, wf_vector, Rd)
+    start_score, pbest_vector, pbest_value = costfunction(bin_vector, bin_vector,
+                                                            pbest_value,numof_value,
+                                                            v_struct, wf_vector, dec_vector)
     print('\n\tcostfunction: OK')
 
     # * Вызов calcfitness
@@ -94,7 +95,7 @@ def iswalg():
     # * Вызов bba
     (g_best, g_bestscore,
     convergence_curve) = bba(numof_agents, A, r, numof_value, max_iteration, bin_vector,
-                            pbest_vector, pbest_value, v_struct, wf_vector, Rd)
+                            pbest_vector, pbest_value, v_struct, wf_vector, dec_vector)
     print('\n\tbba: OK')
 
     # * Вызов correction
@@ -105,7 +106,7 @@ def iswalg():
     # *Вызов sumthd
     (fin_sum, fin_thd,
     switch, distr_spc, fin_wfsum) = sumthd(g_best, v_struct, numof_value,
-                                            wf_vector, Rd)
+                                            wf_vector, dec_vector)
     print('\n\tsumthd: OK\n')
 
     best_f = np.append(best_f, g_bestscore/start_score)

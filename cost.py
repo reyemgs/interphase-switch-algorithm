@@ -19,7 +19,10 @@ def costfunction(
             vec_x[i] = pbest_vector[i]
             vec_x[i+1] = pbest_vector[i+1]
 
-    sumof_values, thd_percent, numof_switching, dec_vector, wf_sum = sumthd(vec_x, V, 6, Izm, Rd)
+    (sumof_values,
+    thd_percent,
+    numof_switching,
+    dec_vector, wf_sum) = sumthd(vec_x, V, 6, Izm, Rd)
 
     for j in range(0, len(thd_percent)):   # THD_sum_I(isnan(THD_sum_I))=[100];
         if np.isnan(thd_percent[j]):
@@ -36,11 +39,11 @@ def costfunction(
     #costs = np.array([all_costs, f])                # TODO Costs
 
     if np.isnan(pbest_value):
-        pbest_vector = o
+        pbest_value = o
     if pbest_value > o:
         pbest_value = o
         pbest_vector = vec_x
 
     #np.append(convergence_curve, pbest_value)       # TODO MyConvergenceCurve
 
-    return o
+    return o, pbest_vector, pbest_value

@@ -34,9 +34,9 @@ def bba(
     Sol[0,] = kodV
 
     for i in range(0, n):
-        Fitness[i] = costfunction(Sol[i,], pbest_vector,
-                                pbest_value, d, v_struct,
-                                wf_vector, Rd)
+        Fitness[i], pbest_vector, pbest_value = costfunction(Sol[i,], pbest_vector,
+                                                            pbest_value, d, v_struct,
+                                                            wf_vector, Rd)
 
     fmin, I = Fitness.min(0), Fitness.argmin(0)
     best = Sol[I,:]
@@ -59,9 +59,9 @@ def bba(
                 if np.random.random_sample() > r:
                     Sol[i, j] = best[j]
 
-            Fnew = costfunction(Sol[i,], pbest_vector,
-                                pbest_value, d, v_struct,
-                                wf_vector, Rd)
+            Fnew, pbest_vector, pbest_value = costfunction(Sol[i,], pbest_vector,
+                                                            pbest_value, d, v_struct,
+                                                            wf_vector, Rd)
 
             if (Fnew <= Fitness[i]) and (np.random.random_sample() < A):
                 Sol[i,] = Sol[i,]
