@@ -19,17 +19,17 @@ def sumthd(
         if vec_x[a] == 1:
             if vec_x[i] == 0:
                 dec_vector[g] = 3
-                wf_sum[2,] = wf_sum[2,] + wf_vector[int(v_struct[1,g]),]
+                wf_sum[2,] = wf_sum[2,] + wf_vector[int(v_struct[1,g]) - 1,]
 
 
         else:
             if vec_x[i] == 1:
                 dec_vector[g] = 2
-                wf_sum[1,] = wf_sum[1,] + wf_vector[int(v_struct[1,g]),]
+                wf_sum[1,] = wf_sum[1,] + wf_vector[int(v_struct[1,g]) - 1,]
 
             else:
                 dec_vector[g] = 1
-                wf_sum[0,] = wf_sum[0,] + wf_vector[int(v_struct[1,g]),]
+                wf_sum[0,] = wf_sum[0,] + wf_vector[int(v_struct[1,g]) - 1,]
 
         if dec_vector[g] != v_struct[2,g]:
             numof_switching += 1

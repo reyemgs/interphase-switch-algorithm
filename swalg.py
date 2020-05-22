@@ -7,12 +7,12 @@ from sumthd import sumthd
 from cost import costfunction
 from binbatalg import bba
 #Rd = np.loadtxt('C:/interphase-switch-algorithm/samples/Rd.txt')
-Rd = np.array([1, 2, 3])
+#Rd = np.array([1, 2, 3])
 
 # ! MainOneBBA.m
 def iswalg():
     # Данные                                # TODO for сol_OP = 3:30
-    total_spc = 3                           # * col_OP
+    total_spc = 30                          # * col_OP
     max_iteration = 30                      # * Max_iteration
     numof_agents = 25                       # * noP
     numof_value = total_spc * 2             # * noV
@@ -32,6 +32,7 @@ def iswalg():
     kv = samples_v['kV']
     v_struct = np.zeros((3, total_spc))     # * V
 
+    Rd =np.zeros(total_spc)
     start_sum = np.array([])                # * StartSum
     start_thd = np.array([])                # * StartTHD
     bin_vector = np.array([])               # * kodV
@@ -58,7 +59,7 @@ def iswalg():
     v_struct[1,] = v2[0, total_spc - 1][0,]
     v_struct[2,] = v3[0, total_spc - 1][0,]
     bin_vector = kv[0, total_spc - 1][0,]
-
+    print(v_struct)
     # * Вызов sumthd
     (start_sum, start_thd,
     start_nswitch, dec_vector, start_wfsum) = sumthd(bin_vector, v_struct,
@@ -139,4 +140,4 @@ def iswalg():
         '\nFvar:', fvar,
         '\nYoK:', yok)
 
-    return fin_wfsum[0,], start_wfsum[0,]
+    return start_wfsum[0,], fin_wfsum[0,], start_wfsum[1,], fin_wfsum[1,], start_wfsum[2,], fin_wfsum[2,]
