@@ -38,7 +38,7 @@ def iswalg():
     bin_vector = np.array([])               # * kodV
     best_f = np.array([])                   # * BestsF
 
-    pbest_value = np.nan
+    pbest_value = np.nan                    # * PreviuosBest
 
     print('\nCalculated for TSPC = ', total_spc)
     #Результаты
@@ -59,17 +59,18 @@ def iswalg():
     v_struct[2,] = v3[0, total_spc - 1][0,]
     bin_vector = kv[0, total_spc - 1][0,]
     pbest_vector = bin_vector
-
+    print(v_struct)
     # * Вызов sumthd
     (start_sum, start_thd,
     start_nswitch, dec_vector, start_wfsum) = sumthd(bin_vector, v_struct,
                                                     numof_value, wf_vector, Rd)
-    # print(  'Start_sum:\n', start_sum,
-    #     '\nStart_THD:\n', start_thd,
-    #     '\nStartKPOP:\n', start_nswitch,
-    #     '\nRd:\n', dec_vector,
-    #     '\nStartSumOSC:\n', start_wfsum)
     print('\n\tsumthd: OK')
+
+    # print(start_sum)
+    # print(start_thd)
+    # print(start_nswitch)
+    # print(dec_vector)
+    # print(start_wfsum)
 
     # Корректируем THD
     for j in range(0, len(start_thd)):   # StartTHD(isnan(StartTHD))=[100];
@@ -77,32 +78,33 @@ def iswalg():
             start_thd[j] = 100
 
     # * Вызов costfunction
-    start_score, pbest_vector, pbest_value = costfunction(bin_vector, bin_vector,
-                                                            pbest_value,numof_value,
-                                                            v_struct, wf_vector, dec_vector)
+    start_score, pbest_vector, pbest_value, dec_vector = costfunction(bin_vector, pbest_vector,
+                                                            pbest_value, numof_value,
+                                                            v_struct, wf_vector, dec_vector, total_spc)
     print('\n\tcostfunction: OK')
+
 
     # * Вызов calcfitness
     O ,start_f1, start_f2 = calcfitness(start_sum, start_thd,
                                         start_nswitch, total_spc)
     print('\n\tcalcfitness: OK')
 
-    pbest_vector = bin_vector
+    #pbest_vector = bin_vector
     pbest_value = start_score
     A = 0.25
     r = 0.1
 
     # * Вызов bba
     (g_best, g_bestscore,
-    convergence_curve) = bba(numof_agents, A, r, numof_value, max_iteration, bin_vector,
-                            pbest_vector, pbest_value, v_struct, wf_vector, dec_vector)
+    convergence_curve, pbest_vector, pbest_value, dec_vector) = bba(numof_agents, A, r, numof_value, max_iteration, bin_vector,
+                                                        pbest_vector, pbest_value, v_struct, wf_vector, dec_vector, total_spc)
     print('\n\tbba: OK')
 
     # * Вызов correction
     g_best = correction(g_best, pbest_vector)
     convergence_curve /= start_score
     print('\n\tcorrection: OK')
-
+    print(g_best)
     # *Вызов sumthd
     (fin_sum, fin_thd,
     switch, distr_spc, fin_wfsum) = sumthd(g_best, v_struct, numof_value,
@@ -110,9 +112,9 @@ def iswalg():
     print('\n\tsumthd: OK\n')
 
     best_f = np.append(best_f, g_bestscore/start_score)
-    print('BestsF: ', best_f)
-    print('gBestScore: ', g_bestscore)
-    print('StartScore: ', start_score)
+    # print('BestsF: ', best_f)
+    # print('gBestScore: ', g_bestscore)
+    # print('StartScore: ', start_score)
     if best_f[0] <= 0.9:
         y_n = 1
         y += 1
@@ -127,18 +129,29 @@ def iswalg():
     fmean = np.mean(best_f)
     fvar = np.var(best_f)
     yok = y
+    # print(
+    #     'FinSum:', fin_sum,
+    #     '\nFinTHD:', fin_thd,
+    #     '\nFbest:', fbest,
+    #     '\nFsteps:', fsteps,
+    #     '\nFinVector:', fin_vector,
+    #     '\nSwitch:', switch,
+    #     '\nKpOP:', numof_switch,
+    #     '\nRaspr_OP:', distr_spc,
+    #     '\nFinSumOsc:', fin_wfsum,
+    #     '\nFmean:', fmean,
+    #     '\nFvar:', fvar,
+    #     '\nYoK:', yok)
     print(
-        'FinSum:', fin_sum,
-        '\nFinTHD:', fin_thd,
-        '\nFbest:', fbest,
-        '\nFsteps:', fsteps,
-        '\nFinVector:', fin_vector,
-        '\nSwitch:', switch,
-        '\nKpOP:', numof_switch,
-        '\nRaspr_OP:', distr_spc,
-        '\nFinSumOsc:', fin_wfsum,
-        '\nFmean:', fmean,
-        '\nFvar:', fvar,
-        '\nYoK:', yok)
-
+        'Исходное значение токов по фазам: ', start_sum,
+        '\nИсходное значение THD по фазам: ', start_thd,
+        '\nИсходное значение целевой функции: ', start_score,
+        '\nИсходная комбинация подключений по фазам: ', v_struct[2,],
+        '\n',
+        '\nПолученное значение токов суммы токов по фазам:: ', fin_sum,
+        '\nПолученное значение THD по фазам: ', fin_thd,
+        '\nЛучшее значение целевой функции: ', fbest,
+        '\nЛучшая комбинация подключений по фазам: ', distr_spc,
+        '\nКоличество переключений: ', numof_switch
+    )
     return start_wfsum[0,], fin_wfsum[0,], start_wfsum[1,], fin_wfsum[1,], start_wfsum[2,], fin_wfsum[2,]

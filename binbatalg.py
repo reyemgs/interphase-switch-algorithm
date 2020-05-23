@@ -13,7 +13,8 @@ def bba(
         pbest_value,      # * PreviousBest
         v_struct,         # * V
         wf_vector,        # * Izm
-        Rd                # * Rd
+        Rd,               # * Rd
+        col_OP            # * col_OP
 ):
     Q_min = 0
     Q_max = 2
@@ -34,9 +35,9 @@ def bba(
     Sol[0,] = kodV
 
     for i in range(0, n):
-        Fitness[i], pbest_vector, pbest_value = costfunction(Sol[i,], pbest_vector,
+        Fitness[i], pbest_vector, pbest_value, Rd = costfunction(Sol[i,], pbest_vector,
                                                             pbest_value, d, v_struct,
-                                                            wf_vector, Rd)
+                                                            wf_vector, Rd, col_OP)
 
     fmin, I = Fitness.min(0), Fitness.argmin(0)
     best = Sol[I,:]
@@ -59,9 +60,9 @@ def bba(
                 if np.random.random_sample() > r:
                     Sol[i, j] = best[j]
 
-            Fnew, pbest_vector, pbest_value = costfunction(Sol[i,], pbest_vector,
+            Fnew, pbest_vector, pbest_value, Rd = costfunction(Sol[i,], pbest_vector,
                                                             pbest_value, d, v_struct,
-                                                            wf_vector, Rd)
+                                                            wf_vector, Rd, col_OP)
 
             if (Fnew <= Fitness[i]) and (np.random.random_sample() < A):
                 Sol[i,] = Sol[i,]
@@ -73,4 +74,4 @@ def bba(
         #print('Number of evaluations: ', N_iter)
         #print('fmin = ', fmin)
 
-    return best, fmin, cg_curve
+    return best, fmin, cg_curve, pbest_vector, pbest_value, Rd

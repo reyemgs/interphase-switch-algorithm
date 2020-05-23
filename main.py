@@ -42,12 +42,19 @@ def main():
             linewidth = 1,
             color = 'seagreen')
 
+    wf[0].set_xlim(0, 104)
+    wf[0].set_ylim(65000, -65000)
+    wf[1].set_xlim(0, 104)
+    wf[1].set_ylim(65000, -65000)
+    wf[2].set_xlim(0, 104)
+    wf[2].set_ylim(65000, -65000)
     wf[0].grid(True)
     wf[1].grid(True)
     wf[2].grid(True)
     wf[0].legend()
     wf[1].legend()
     wf[2].legend()
+
     plt.show()
 
 if __name__ == "__main__":

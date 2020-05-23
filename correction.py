@@ -9,5 +9,5 @@ def correction(
         if inp_vector[i] == 1 and inp_vector[i+1] == 1:
             inp_vector[i] = pbest_vector[i]
             inp_vector[i+1] = pbest_vector[i+1]
-
-    return inp_vector
+    output_vector = inp_vector
+    return output_vector
