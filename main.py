@@ -1,4 +1,5 @@
 import numpy as np
+import gc
 import matplotlib.pyplot as plt
 from swalg import iswalg
 
@@ -56,6 +57,7 @@ def main():
     wf[2].legend()
 
     plt.show()
+    gc.collect()
 
 if __name__ == "__main__":
     main()
