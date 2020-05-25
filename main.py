@@ -44,11 +44,11 @@ def main():
             color = 'seagreen')
 
     wf[0].set_xlim(0, 104)
-    wf[0].set_ylim(65000, -65000)
+    wf[0].set_ylim(-65000, 65000)
     wf[1].set_xlim(0, 104)
-    wf[1].set_ylim(65000, -65000)
+    wf[1].set_ylim(-65000, 65000)
     wf[2].set_xlim(0, 104)
-    wf[2].set_ylim(65000, -65000)
+    wf[2].set_ylim(-65000, 65000)
     wf[0].grid(True)
     wf[1].grid(True)
     wf[2].grid(True)
@@ -57,7 +57,6 @@ def main():
     wf[2].legend()
 
     plt.show()
-    gc.collect()
 
 if __name__ == "__main__":
     main()

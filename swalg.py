@@ -172,30 +172,29 @@ def iswalg():
     fmean = np.mean(best_f)
     fvar = np.var(best_f)
     yok = y
-    # print(
-    #     'FinSum:', fin_sum,
-    #     '\nFinTHD:', fin_thd,
-    #     '\nFbest:', fbest,
-    #     '\nFsteps:', fsteps,
-    #     '\nFinVector:', fin_vector,
-    #     '\nSwitch:', switch,
-    #     '\nKpOP:', numof_switch,
-    #     '\nRaspr_OP:', distr_spc,
-    #     '\nFinSumOsc:', fin_wfsum,
-    #     '\nFmean:', fmean,
-    #     '\nFvar:', fvar,
-    #     '\nYoK:', yok)
     print(
-        'Исходное значение токов по фазам: ', start_sum,
-        '\nИсходное значение THD по фазам: ', start_thd,
-        '\nИсходное значение целевой функции: ', start_score,
-        '\nИсходная комбинация подключений по фазам: ', v_struct[2,],
-        '\n',
-        '\nПолученное значение токов суммы токов по фазам:: ', fin_sum,
-        '\nПолученное значение THD по фазам: ', fin_thd,
-        '\nЛучшее значение целевой функции: ', fbest,
-        '\nЛучшая комбинация подключений по фазам: ', distr_spc,
-        '\nКоличество переключений: ', switch
-    )
+        'FinSum:', fin_sum,
+        '\nFinTHD:', fin_thd,
+        '\nFbest:', fbest,
+        '\nFsteps:', fsteps,
+        '\nFinVector:', fin_vector,
+        '\nSwitch:', switch,
+        '\nKpOP:', numof_switch,
+        '\nRaspr_OP:', distr_spc,
+        '\nFinSumOsc:', fin_wfsum,
+        '\nFmean:', fmean,
+        '\nFvar:', fvar,
+        '\nYoK:', yok)
+    # print(
+    #     'Исходное значение токов по фазам: ', start_sum,
+    #     '\nИсходное значение THD по фазам: ', start_thd,
+    #     '\nИсходное значение целевой функции: ', start_score,
+    #     '\nИсходная комбинация подключений по фазам: ', v_struct[2,],
+    #     '\n',
+    #     '\nПолученное значение токов суммы токов по фазам:: ', fin_sum,
+    #     '\nПолученное значение THD по фазам: ', fin_thd,
+    #     '\nЛучшее значение целевой функции: ', fbest,
+    #     '\nЛучшая комбинация подключений по фазам: ', distr_spc,
+    #     '\nКоличество переключений: ', switch
+    # )
     return start_wfsum[0,], fin_wfsum[0,], start_wfsum[1,], fin_wfsum[1,], start_wfsum[2,], fin_wfsum[2,]
-    gc.collect()
